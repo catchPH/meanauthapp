@@ -19,17 +19,17 @@ module.exports = function(passport){
 
 const User = require('../models/user');
 const config = require('../config/database');
-var JwtStrategy = require('passport-jwt').Strategy,
+const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 
 module.exports = function(passport) {
-    var opts = {}
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+    let opts = {}
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
     opts.secretOrKey = config.secret;
     //opts.issuer = 'accounts.examplesoft.com';
     //opts.audience = 'yoursite.net';
-    passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-        User.findOne({id: jwt_payload.sub}, function(err, user) {
+    passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+        User.getUserById(jwt_payload._id, (err, user) => {
             if (err) {
                 return done(err, false);
             }
