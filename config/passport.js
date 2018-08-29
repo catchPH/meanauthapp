@@ -1,4 +1,4 @@
-/*const JwtStrategy = require('passport-jwt').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
 const config = require('../config/database');
@@ -15,9 +15,9 @@ module.exports = function(passport){
             else { return done(null, false); }
         });
     }));
-}*/
+}
 
-const User = require('../models/user');
+/*const User = require('../models/user');
 const config = require('../config/database');
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -41,4 +41,4 @@ module.exports = function(passport) {
             }
         });
     }));
-}
+}*/
